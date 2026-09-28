@@ -4,6 +4,11 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 // JPA
 @Entity
 @Table(name = "vehicule")
@@ -33,4 +38,31 @@ public class Vehicule {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 20)
     private StatutVehicule statut;
+
+    // ---- Associations ----
+
+    // Vehicule * --- 1 Agence
+    @ManyToOne
+    @JoinColumn(name = "agence_id")
+    private Agence agence;
+
+    // Vehicule 1 --- * Maintenance
+    @OneToMany(mappedBy = "vehicule")
+    @Builder.Default
+    private List<Maintenance> maintenances = new ArrayList<>();
+
+    // Vehicule * --- * Equipement
+    @ManyToMany
+    @JoinTable(
+            name = "vehicule_equipement",
+            joinColumns = @JoinColumn(name = "vehicule_id"),
+            inverseJoinColumns = @JoinColumn(name = "equipement_id")
+    )
+    @Builder.Default
+    private Set<Equipement> equipements = new HashSet<>();
+
+    // Vehicule 1 --- * Reservation
+    @OneToMany(mappedBy = "vehicule")
+    @Builder.Default
+    private List<Reservation> reservations = new ArrayList<>();
 }

@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 // JPA
 @Entity
@@ -32,4 +34,11 @@ public class Client {
     private String numPermis;
     @Column(nullable = false)
     private LocalDate dateInscription;
+
+    // ---- Associations ----
+
+    // Client 1 --- * Reservation
+    @OneToMany(mappedBy = "client")
+    @Builder.Default
+    private List<Reservation> reservations = new ArrayList<>();
 }

@@ -27,4 +27,15 @@ public class Contrat {
     private BigDecimal montantTotal;
     @Column(nullable = false)
     private boolean valide;
+
+    // ---- Associations ----
+
+    // Contrat 1 --- 1 Reservation (côté propriétaire)
+    @OneToOne
+    @JoinColumn(name = "reservation_id")
+    private Reservation reservation;
+
+    // Contrat 1 --- 1 Paiement
+    @OneToOne(mappedBy = "contrat")
+    private Paiement paiement;
 }

@@ -26,4 +26,11 @@ public class Maintenance {
     private LocalDate dateFin;
     @Column(length = 500)
     private String description;
+
+    // ---- Associations ----
+
+    // Maintenance * --- 1 Vehicule
+    @ManyToOne
+    @JoinColumn(name = "vehicule_id")
+    private Vehicule vehicule;
 }
