@@ -2,7 +2,9 @@ package tn.esprit.autoloc.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import tn.esprit.autoloc.domain.Agence;
 import tn.esprit.autoloc.domain.Employe;
+import tn.esprit.autoloc.repository.AgenceRepository;
 import tn.esprit.autoloc.repository.EmployeRepository;
 
 import java.util.List;
@@ -12,6 +14,7 @@ import java.util.List;
 public class EmployeService implements IEmployeService {
 
     private final EmployeRepository employeRepository;
+    private final AgenceRepository agenceRepository;
 
     @Override
     public List<Employe> retrieveAllEmployes() {
@@ -42,4 +45,28 @@ public class EmployeService implements IEmployeService {
     public List<Employe> addEmployes(List<Employe> employes) {
         return employeRepository.saveAll(employes);
     }
+
+    // ---- Affectation Employe <-> Agence (ManyToOne) ----
+
+    @Override
+    public Employe desaffecterEmploye(Long idEmploye) {
+        Employe employe = employeRepository.findById(idEmploye).orElse(null);
+        if (employe != null) {
+            employe.setAgence(null);
+            return employeRepository.save(employe);
+        }
+        return null;
+    }
+
+    @Override
+    public Employe affecterEmploye(Long idEmploye, Long idAgence) {
+        Employe employe = employeRepository.findById(idEmploye).orElse(null);
+        Agence agence = agenceRepository.findById(idAgence).orElse(null);
+        if (employe != null && agence != null) {
+            employe.setAgence(agence);
+            return employeRepository.save(employe);
+        }
+        return null;
+    }
 }
+
