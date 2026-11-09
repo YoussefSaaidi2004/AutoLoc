@@ -1,5 +1,6 @@
 package tn.esprit.autoloc.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -33,11 +34,13 @@ public class Agence {
     // ---- Associations ----
 
     // Agence 1 --- * Vehicule
+    @JsonIgnore
     @OneToMany(mappedBy = "agence")
     @Builder.Default
     private List<Vehicule> vehicules = new ArrayList<>();
 
     // Agence 1 --- * Employe
+    @JsonIgnore
     @OneToMany(mappedBy = "agence")
     @Builder.Default
     private List<Employe> employes = new ArrayList<>();

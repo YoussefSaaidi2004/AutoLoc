@@ -1,5 +1,6 @@
 package tn.esprit.autoloc.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -32,6 +33,7 @@ public class Paiement {
     // ---- Associations ----
 
     // Paiement 1 --- 1 Contrat (côté propriétaire)
+    @JsonIgnore
     @OneToOne
     @JoinColumn(name = "contrat_id")
     private Contrat contrat;

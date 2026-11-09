@@ -1,5 +1,6 @@
 package tn.esprit.autoloc.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -38,6 +39,7 @@ public class Client {
     // ---- Associations ----
 
     // Client 1 --- * Reservation
+    @JsonIgnore
     @OneToMany(mappedBy = "client")
     @Builder.Default
     private List<Reservation> reservations = new ArrayList<>();
