@@ -5,5 +5,10 @@ import org.springframework.stereotype.Repository;
 import tn.esprit.autoloc.domain.Maintenance;
 
 @Repository
+import java.time.LocalDate;
+import java.util.List;
+
 public interface MaintenanceRepository extends JpaRepository<Maintenance, Long> {
+	// Partie V
+	List<Maintenance> findByDateFinBetween(LocalDate start, LocalDate end);
 }

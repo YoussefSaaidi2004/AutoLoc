@@ -1,3 +1,14 @@
+    // ---- Recherche avancée ----
+
+    @GetMapping("/by-date-debut-after")
+    public List<Reservation> getByDateDebutAfter(@RequestParam String date) {
+        return reservationService.findByDateDebutAfter(java.time.LocalDate.parse(date));
+    }
+
+    @GetMapping("/by-date-fin-before")
+    public List<Reservation> getByDateFinBefore(@RequestParam String date) {
+        return reservationService.findByDateFinBefore(java.time.LocalDate.parse(date));
+    }
 package tn.esprit.autoloc.web.controller;
 
 import lombok.RequiredArgsConstructor;

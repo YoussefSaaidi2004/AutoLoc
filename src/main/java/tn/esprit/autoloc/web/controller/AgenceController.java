@@ -1,3 +1,14 @@
+    // ---- Recherche avancée ----
+
+    @GetMapping("/by-ville")
+    public List<Agence> getByVille(@RequestParam String ville) {
+        return agenceService.findByVille(ville);
+    }
+
+    @GetMapping("/by-nom-end")
+    public List<Agence> getByNomEnd(@RequestParam String nom) {
+        return agenceService.findByNomEndingWith(nom);
+    }
 package tn.esprit.autoloc.web.controller;
 
 import lombok.RequiredArgsConstructor;

@@ -1,3 +1,14 @@
+    // ---- Recherche avancée ----
+
+    @Override
+    public List<Agence> findByVille(String ville) {
+        return agenceRepository.findByVille(ville);
+    }
+
+    @Override
+    public List<Agence> findByNomEndingWith(String nom) {
+        return agenceRepository.findByNomEndingWithIgnoreCase(nom);
+    }
 package tn.esprit.autoloc.service;
 
 import lombok.RequiredArgsConstructor;

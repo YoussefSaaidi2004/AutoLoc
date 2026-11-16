@@ -1,3 +1,14 @@
+    // ---- Recherche avancée ----
+
+    @Override
+    public List<Reservation> findByDateDebutAfter(LocalDate date) {
+        return reservationRepository.findByDateDebutAfter(date);
+    }
+
+    @Override
+    public List<Reservation> findByDateFinBefore(LocalDate date) {
+        return reservationRepository.findByDateFinBefore(date);
+    }
 package tn.esprit.autoloc.service;
 
 import lombok.RequiredArgsConstructor;

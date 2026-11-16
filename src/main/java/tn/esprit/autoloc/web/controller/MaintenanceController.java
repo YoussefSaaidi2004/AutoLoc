@@ -1,3 +1,9 @@
+    // ---- Recherche avancée ----
+
+    @GetMapping("/by-date-fin-between")
+    public List<Maintenance> getByDateFinBetween(@RequestParam String start, @RequestParam String end) {
+        return maintenanceService.findByDateFinBetween(java.time.LocalDate.parse(start), java.time.LocalDate.parse(end));
+    }
 package tn.esprit.autoloc.web.controller;
 
 import lombok.RequiredArgsConstructor;

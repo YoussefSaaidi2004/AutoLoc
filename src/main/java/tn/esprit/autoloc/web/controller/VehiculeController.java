@@ -1,3 +1,78 @@
+import tn.esprit.autoloc.domain.CategorieVehicule;
+import tn.esprit.autoloc.domain.StatutVehicule;
+import java.math.BigDecimal;
+import org.springframework.web.bind.annotation.RequestParam;
+    // ---- Recherche avancée ----
+
+    // Partie I
+    @GetMapping("/by-marque")
+    public List<Vehicule> getByMarque(@RequestParam String marque) {
+        return vehiculeService.findByMarque(marque);
+    }
+
+    @GetMapping("/by-categorie")
+    public List<Vehicule> getByCategorie(@RequestParam CategorieVehicule categorie) {
+        return vehiculeService.findByCategorie(categorie);
+    }
+
+    @GetMapping("/by-statut")
+    public List<Vehicule> getByStatut(@RequestParam StatutVehicule statut) {
+        return vehiculeService.findByStatut(statut);
+    }
+
+    // Partie II
+    @GetMapping("/by-marque-like")
+    public List<Vehicule> getByMarqueLike(@RequestParam String marque) {
+        return vehiculeService.findByMarqueContaining(marque);
+    }
+
+    @GetMapping("/by-modele-starts")
+    public List<Vehicule> getByModeleStarts(@RequestParam String modele) {
+        return vehiculeService.findByModeleStartingWith(modele);
+    }
+
+    // Partie III
+    @GetMapping("/tarif-gt")
+    public List<Vehicule> getByTarifGreater(@RequestParam BigDecimal tarif) {
+        return vehiculeService.findByTarifJournalierGreaterThan(tarif);
+    }
+
+    @GetMapping("/tarif-lt")
+    public List<Vehicule> getByTarifLess(@RequestParam BigDecimal tarif) {
+        return vehiculeService.findByTarifJournalierLessThan(tarif);
+    }
+
+    @GetMapping("/tarif-gte")
+    public List<Vehicule> getByTarifGreaterEqual(@RequestParam BigDecimal tarif) {
+        return vehiculeService.findByTarifJournalierGreaterThanEqual(tarif);
+    }
+
+    // Partie IV
+    @GetMapping("/by-marque-statut")
+    public List<Vehicule> getByMarqueAndStatut(@RequestParam String marque, @RequestParam StatutVehicule statut) {
+        return vehiculeService.findByMarqueAndStatut(marque, statut);
+    }
+
+    @GetMapping("/by-categories")
+    public List<Vehicule> getByCategories(@RequestParam List<CategorieVehicule> categories) {
+        return vehiculeService.findByCategorieIn(categories);
+    }
+
+    @GetMapping("/by-marque-tarif-lt")
+    public List<Vehicule> getByMarqueAndTarifLess(@RequestParam String marque, @RequestParam BigDecimal tarif) {
+        return vehiculeService.findByMarqueAndTarifJournalierLessThan(marque, tarif);
+    }
+
+    // Partie VI
+    @GetMapping("/disponibles-tarif-asc")
+    public List<Vehicule> getDisponiblesOrderByTarifAsc() {
+        return vehiculeService.findByStatutOrderByTarifJournalierAsc(StatutVehicule.DISPONIBLE);
+    }
+
+    @GetMapping("/tarif-desc")
+    public List<Vehicule> getAllOrderByTarifDesc() {
+        return vehiculeService.findAllByOrderByTarifJournalierDesc();
+    }
 package tn.esprit.autoloc.web.controller;
 
 import lombok.RequiredArgsConstructor;

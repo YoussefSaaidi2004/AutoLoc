@@ -1,3 +1,9 @@
+    // ---- Recherche avancée ----
+
+    @Override
+    public List<Maintenance> findByDateFinBetween(LocalDate start, LocalDate end) {
+        return maintenanceRepository.findByDateFinBetween(start, end);
+    }
 package tn.esprit.autoloc.service;
 
 import lombok.RequiredArgsConstructor;
