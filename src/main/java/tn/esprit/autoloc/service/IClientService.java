@@ -11,4 +11,5 @@ public interface IClientService {
     void removeClient(Long idClient);
     List<Client> addClients (List<Client> clients);
 
+    List<Object[]> countReservationsByClient();
 }

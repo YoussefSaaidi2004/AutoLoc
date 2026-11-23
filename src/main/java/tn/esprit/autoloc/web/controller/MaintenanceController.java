@@ -1,9 +1,3 @@
-    // ---- Recherche avancée ----
-
-    @GetMapping("/by-date-fin-between")
-    public List<Maintenance> getByDateFinBetween(@RequestParam String start, @RequestParam String end) {
-        return maintenanceService.findByDateFinBetween(java.time.LocalDate.parse(start), java.time.LocalDate.parse(end));
-    }
 package tn.esprit.autoloc.web.controller;
 
 import lombok.RequiredArgsConstructor;
@@ -12,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import tn.esprit.autoloc.domain.Maintenance;
 import tn.esprit.autoloc.service.IMaintenanceService;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -52,5 +47,12 @@ public class MaintenanceController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteMaintenance(@PathVariable("id") Long idMaintenance) {
         maintenanceService.removeMaintenance(idMaintenance);
+    }
+
+    // ---- Recherche avancée ----
+
+    @GetMapping("/by-date-fin-between")
+    public List<Maintenance> getByDateFinBetween(@RequestParam String start, @RequestParam String end) {
+        return maintenanceService.findByDateFinBetween(LocalDate.parse(start), LocalDate.parse(end));
     }
 }

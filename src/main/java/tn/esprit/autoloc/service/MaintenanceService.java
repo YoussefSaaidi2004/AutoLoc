@@ -1,9 +1,3 @@
-    // ---- Recherche avancée ----
-
-    @Override
-    public List<Maintenance> findByDateFinBetween(LocalDate start, LocalDate end) {
-        return maintenanceRepository.findByDateFinBetween(start, end);
-    }
 package tn.esprit.autoloc.service;
 
 import lombok.RequiredArgsConstructor;
@@ -11,6 +5,7 @@ import org.springframework.stereotype.Service;
 import tn.esprit.autoloc.domain.Maintenance;
 import tn.esprit.autoloc.repository.MaintenanceRepository;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -47,5 +42,12 @@ public class MaintenanceService implements IMaintenanceService {
     @Override
     public List<Maintenance> addMaintenances(List<Maintenance> maintenances) {
         return maintenanceRepository.saveAll(maintenances);
+    }
+
+    // ---- Recherche avancée ----
+
+    @Override
+    public List<Maintenance> findByDateFinBetween(LocalDate start, LocalDate end) {
+        return maintenanceRepository.findByDateFinBetween(start, end);
     }
 }

@@ -2,14 +2,15 @@ package tn.esprit.autoloc.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import tn.esprit.autoloc.domain.Vehicule;
-
-@Repository
 import tn.esprit.autoloc.domain.CategorieVehicule;
 import tn.esprit.autoloc.domain.StatutVehicule;
+import tn.esprit.autoloc.domain.Vehicule;
+import org.springframework.data.jpa.repository.Query;
+
 import java.math.BigDecimal;
 import java.util.List;
 
+@Repository
 public interface VehiculeRepository extends JpaRepository<Vehicule, Long> {
 	// Partie I
 	List<Vehicule> findByMarque(String marque);
@@ -33,4 +34,11 @@ public interface VehiculeRepository extends JpaRepository<Vehicule, Long> {
 	// Partie VI
 	List<Vehicule> findByStatutOrderByTarifJournalierAsc(StatutVehicule statut);
 	List<Vehicule> findAllByOrderByTarifJournalierDesc();
+
+	// Recherche par agence
+	List<Vehicule> findByAgence_IdAgence(Long idAgence);
+
+	// Statistiques
+	@Query("SELECT v.agence.idAgence, COUNT(v) FROM Vehicule v WHERE v.agence IS NOT NULL GROUP BY v.agence.idAgence")
+	List<Object[]> countVehiculesByAgence();
 }

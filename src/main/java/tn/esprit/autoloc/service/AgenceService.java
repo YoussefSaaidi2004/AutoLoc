@@ -1,14 +1,3 @@
-    // ---- Recherche avancée ----
-
-    @Override
-    public List<Agence> findByVille(String ville) {
-        return agenceRepository.findByVille(ville);
-    }
-
-    @Override
-    public List<Agence> findByNomEndingWith(String nom) {
-        return agenceRepository.findByNomEndingWithIgnoreCase(nom);
-    }
 package tn.esprit.autoloc.service;
 
 import lombok.RequiredArgsConstructor;
@@ -52,5 +41,22 @@ public class AgenceService implements IAgenceService {
     @Override
     public List<Agence> addAgences(List<Agence> agences) {
         return agenceRepository.saveAll(agences);
+    }
+
+    // ---- Recherche avancée ----
+
+    @Override
+    public List<Agence> findByVille(String ville) {
+        return agenceRepository.findByVille(ville);
+    }
+
+    @Override
+    public List<Agence> findByNomEndingWith(String nom) {
+        return agenceRepository.findByNomEndingWithIgnoreCase(nom);
+    }
+
+    @Override
+    public List<Object[]> countVehiculesByAgence() {
+        return agenceRepository.countVehiculesByAgence();
     }
 }

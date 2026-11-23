@@ -47,4 +47,9 @@ public class ClientController {
     public void deleteClient(@PathVariable("id") Long idClient) {
         clientService.removeClient(idClient);
     }
+
+    @GetMapping("/count-reservations")
+    public List<Object[]> countReservationsByClient() {
+        return clientService.countReservationsByClient();
+    }
 }

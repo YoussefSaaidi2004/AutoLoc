@@ -36,4 +36,8 @@ public interface IVehiculeService {
     List<Vehicule> findByMarqueAndTarifJournalierLessThan(String marque, BigDecimal tarif);
     List<Vehicule> findByStatutOrderByTarifJournalierAsc(StatutVehicule statut);
     List<Vehicule> findAllByOrderByTarifJournalierDesc();
+
+    // Recherche et statistiques
+    List<Vehicule> getVehiculesByAgence(Long idAgence);
+    List<Object[]> countVehiculesByAgence();
 }

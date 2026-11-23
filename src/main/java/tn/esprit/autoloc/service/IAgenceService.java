@@ -3,8 +3,6 @@ package tn.esprit.autoloc.service;
 import tn.esprit.autoloc.domain.Agence;
 import java.util.List;
 
-import java.util.List;
-
 public interface IAgenceService {
     List<Agence> retrieveAllAgences();
     Agence addAgence(Agence a);
@@ -16,4 +14,6 @@ public interface IAgenceService {
     // Recherche avancée
     List<Agence> findByVille(String ville);
     List<Agence> findByNomEndingWith(String nom);
+
+    List<Object[]> countVehiculesByAgence();
 }

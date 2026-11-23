@@ -1,14 +1,3 @@
-    // ---- Recherche avancée ----
-
-    @Override
-    public List<Reservation> findByDateDebutAfter(LocalDate date) {
-        return reservationRepository.findByDateDebutAfter(date);
-    }
-
-    @Override
-    public List<Reservation> findByDateFinBefore(LocalDate date) {
-        return reservationRepository.findByDateFinBefore(date);
-    }
 package tn.esprit.autoloc.service;
 
 import lombok.RequiredArgsConstructor;
@@ -16,6 +5,7 @@ import org.springframework.stereotype.Service;
 import tn.esprit.autoloc.domain.Reservation;
 import tn.esprit.autoloc.repository.ReservationRepository;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -52,5 +42,27 @@ public class ReservationService implements IReservationService {
     @Override
     public List<Reservation> addReservations(List<Reservation> reservations) {
         return reservationRepository.saveAll(reservations);
+    }
+
+    // ---- Recherche avancée ----
+
+    @Override
+    public List<Reservation> findByDateDebutAfter(LocalDate date) {
+        return reservationRepository.findByDateDebutAfter(date);
+    }
+
+    @Override
+    public List<Reservation> findByDateFinBefore(LocalDate date) {
+        return reservationRepository.findByDateFinBefore(date);
+    }
+
+    @Override
+    public List<Reservation> getReservationsByClient(Long idClient) {
+        return reservationRepository.findByClient_IdClient(idClient);
+    }
+
+    @Override
+    public List<Object[]> countReservationsByClient() {
+        return reservationRepository.countReservationsByClient();
     }
 }

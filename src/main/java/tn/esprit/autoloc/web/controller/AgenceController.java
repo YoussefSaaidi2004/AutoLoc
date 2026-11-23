@@ -1,14 +1,3 @@
-    // ---- Recherche avancée ----
-
-    @GetMapping("/by-ville")
-    public List<Agence> getByVille(@RequestParam String ville) {
-        return agenceService.findByVille(ville);
-    }
-
-    @GetMapping("/by-nom-end")
-    public List<Agence> getByNomEnd(@RequestParam String nom) {
-        return agenceService.findByNomEndingWith(nom);
-    }
 package tn.esprit.autoloc.web.controller;
 
 import lombok.RequiredArgsConstructor;
@@ -57,5 +46,22 @@ public class AgenceController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteAgence(@PathVariable("id") Long idAgence) {
         agenceService.removeAgence(idAgence);
+    }
+
+    // ---- Recherche avancée ----
+
+    @GetMapping("/by-ville")
+    public List<Agence> getByVille(@RequestParam String ville) {
+        return agenceService.findByVille(ville);
+    }
+
+    @GetMapping("/by-nom-end")
+    public List<Agence> getByNomEnd(@RequestParam String nom) {
+        return agenceService.findByNomEndingWith(nom);
+    }
+
+    @GetMapping("/count-vehicules")
+    public List<Object[]> countVehiculesByAgence() {
+        return agenceService.countVehiculesByAgence();
     }
 }

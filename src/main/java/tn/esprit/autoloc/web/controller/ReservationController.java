@@ -1,14 +1,3 @@
-    // ---- Recherche avancée ----
-
-    @GetMapping("/by-date-debut-after")
-    public List<Reservation> getByDateDebutAfter(@RequestParam String date) {
-        return reservationService.findByDateDebutAfter(java.time.LocalDate.parse(date));
-    }
-
-    @GetMapping("/by-date-fin-before")
-    public List<Reservation> getByDateFinBefore(@RequestParam String date) {
-        return reservationService.findByDateFinBefore(java.time.LocalDate.parse(date));
-    }
 package tn.esprit.autoloc.web.controller;
 
 import lombok.RequiredArgsConstructor;
@@ -17,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import tn.esprit.autoloc.domain.Reservation;
 import tn.esprit.autoloc.service.IReservationService;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -57,5 +47,27 @@ public class ReservationController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteReservation(@PathVariable("id") Long idReservation) {
         reservationService.removeReservation(idReservation);
+    }
+
+    // ---- Recherche avancée ----
+
+    @GetMapping("/by-date-debut-after")
+    public List<Reservation> getByDateDebutAfter(@RequestParam String date) {
+        return reservationService.findByDateDebutAfter(LocalDate.parse(date));
+    }
+
+    @GetMapping("/by-date-fin-before")
+    public List<Reservation> getByDateFinBefore(@RequestParam String date) {
+        return reservationService.findByDateFinBefore(LocalDate.parse(date));
+    }
+
+    @GetMapping("/by-client")
+    public List<Reservation> getReservationsByClient(@RequestParam Long idClient) {
+        return reservationService.getReservationsByClient(idClient);
+    }
+
+    @GetMapping("/count-by-client")
+    public List<Object[]> countReservationsByClient() {
+        return reservationService.countReservationsByClient();
     }
 }
